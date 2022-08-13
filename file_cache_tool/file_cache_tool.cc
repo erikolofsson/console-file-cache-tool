@@ -23,10 +23,10 @@ int main(int argc, char *argv[])
                 
         switch (ch){
             case OPT_SET_MIN:
-                setMin(atoi(optarg));
+                setMin(_atoi64(optarg));
                 break;
             case OPT_SET_MAX:
-                setMax(atoi(optarg));
+                setMax(_atoi64(optarg));
                 break;
             case OPT_GET_INFO:
                 getInfo();
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-void setMin(unsigned int min){
+void setMin(size_t min){
     if(SetPrivilege(SE_INCREASE_QUOTA_NAME)){
         
         SIZE_T max, old;DWORD flags;
@@ -60,7 +60,7 @@ void setMin(unsigned int min){
     getInfo();
 }
 
-void setMax(unsigned int max){
+void setMax(size_t max){
     
     if(SetPrivilege(SE_INCREASE_QUOTA_NAME)){
         
@@ -87,8 +87,8 @@ void getInfo(){
         errorInfo();
     }
     
-    fprintf(stderr, "Minimum File Cache Size:\t%lu bytes\n", min); 
-    fprintf(stderr, "Maximum File Cache Size:\t%lu bytes\n", max); 
+    fprintf(stderr, "Minimum File Cache Size:\t%zu bytes\n", min); 
+    fprintf(stderr, "Maximum File Cache Size:\t%zu bytes\n", max); 
     fprintf(stderr, "Minimum File Cache Size Enabled:\t%s\n", !!(flags & FILE_CACHE_MIN_HARD_ENABLE) ? "yes" : "no"); 
     fprintf(stderr, "Maximum File Cache Size Enabled:\t%s\n", !!(flags & FILE_CACHE_MAX_HARD_ENABLE) ? "yes" : "no"); 
 }

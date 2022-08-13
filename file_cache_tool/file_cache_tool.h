@@ -19,8 +19,8 @@
 //#include <Psapi.h>
 #endif
 
-void setMin(unsigned int);
-void setMax(unsigned int);
+void setMin(size_t);
+void setMax(size_t);
 void getInfo(void);
 void flush(void);
 BOOL SetPrivilege(LPCTSTR);
